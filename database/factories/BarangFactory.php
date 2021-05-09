@@ -22,7 +22,7 @@ class BarangFactory extends Factory
     public function definition()
     {
         return [
-            'nama' => $this->faker->sentence(1),
+            'nama' => $this->faker->word(),
             'harga' => rand(5000,50000),
             'kios_id' => rand(1,10)
         ];

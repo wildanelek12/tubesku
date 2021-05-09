@@ -23,7 +23,7 @@ class KiosFactory extends Factory
     {
         return [
             'user_id' => rand(1,10),
-            'nama' => $this->faker->sentence(1),
+            'nama' => $this->faker->word(),
             'password' => bcrypt('123'),
             'verified' => 0,
             'tgl_kontrak' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
