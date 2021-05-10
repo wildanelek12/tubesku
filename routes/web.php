@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KiosController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\{AuthController, HomeController};
 
 
@@ -18,13 +19,14 @@ use App\Http\Controllers\{AuthController, HomeController};
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.admin');
+Route::get('/tes', function () {
+    return view('welcome');
 });
 
 Route::resource('barang',BarangController::class);
 Route::resource('kios',KiosController::class);
 Route::resource('pembayaran',PembayaranController::class);
+Route::resource('user',UserController::class);
 Route::get('acc/{pembayaran}', [PembayaranController::class, 'accPembayaran'])->name('acc');
 
 

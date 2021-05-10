@@ -38,8 +38,8 @@
             </a>
 					</li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile.html">
+					<li class="sidebar-item {{ Route::currentRouteNamed('user.index') ? 'active' : '' }} ">
+						<a class="sidebar-link" href="{{url('/user')}}">
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Managemen Penyewa</span>
             </a>
 					</li>
@@ -57,7 +57,7 @@
 					</li>
 
 					<li class="sidebar-item ">
-						<a class="sidebar-link" href="pages-blank.html">
+						<a class="sidebar-link" href="">
               <i class="align-middle" data-feather="book"></i> <span class="align-middle"></span>
             </a>
 					</li>
