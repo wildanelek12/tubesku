@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Kios;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
@@ -14,7 +15,9 @@ class BarangController extends Controller
      */
     public function index()
     {
-        //
+        $barangs = Barang::all();
+        
+        return view('barang.index',compact('barangs'));
     }
 
     /**
@@ -24,7 +27,8 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        $kios = Kios::all();
+        return view('barang.create',compact('kios'));
     }
 
     /**
@@ -35,7 +39,18 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+           'nama'         => 'required',
+           'harga'        => 'required',
+           'kios_id'        => 'required'
+
+        ]);
+
+        Barang::create($validateData);
+        $barangs = Barang::all();
+        
+        return view('barang.index',compact('barangs'));
+        
     }
 
     /**
@@ -57,7 +72,8 @@ class BarangController extends Controller
      */
     public function edit(Barang $barang)
     {
-        //
+        $kios = Kios::all();
+        return view(('barang.edit'),['barang' =>$barang,'kios'=>$kios]);
     }
 
     /**
@@ -69,7 +85,18 @@ class BarangController extends Controller
      */
     public function update(Request $request, Barang $barang)
     {
-        //
+        $validateData = $request->validate([
+            'nama'         => 'required',
+            'harga'        => 'required',
+            'kios_id'        => 'required'
+ 
+         ]);
+
+         
+         Barang::where('id',$barang->id)->update($validateData);
+         $barang->update($validateData);
+         $barangs = Barang::all();
+         return view('barang.index',compact('barangs'));
     }
 
     /**
@@ -80,6 +107,8 @@ class BarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
-        //
+        $barang->delete();
+        $barangs = Barang::all();
+        return view('barang.index',compact('barangs'));
     }
 }
