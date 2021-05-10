@@ -19,6 +19,7 @@ class CreatePembayaransTable extends Migration
             $table->foreignId('kios_id')->constrained('kios');
             $table->date('tgl_pembayaran');
             $table->string('bukti');
+            $table->boolean('verified')->default(0);
             $table->timestamps();
         });
     }

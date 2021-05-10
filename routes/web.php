@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KiosController;
+use App\Http\Controllers\{AuthController, HomeController};
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +23,16 @@ Route::get('/', function () {
 
 Route::resource('barang',BarangController::class);
 Route::resource('kios',BarangController::class);
-Route::get('/kios', [App\Http\Controllers\KiosController::class, 'index'])->name('kios.index');
+Route::get('/kios', [KiosController::class, 'index'])->name('kios.index');
 
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
+Route::get('login', [AuthController::class, 'showFormLogin'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::get('register', [AuthController::class, 'showFormRegister'])->name('register');
+Route::post('register', [AuthController::class, 'register']);
+ 
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('home', [HomeController::class, 'index'])->name('home');
+  Route::get('logout', [AuthController::class, 'logout'])->name('logout'); 
+});

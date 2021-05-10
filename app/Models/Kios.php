@@ -3,18 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
 class Kios extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
-    public function barangs()
-    {
-        return $this->hasMany(Barang::class);
-    }
-    protected $guarded = [
-
-    ];
-
+    protected $guarded = [];
 }
