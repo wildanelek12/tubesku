@@ -49,8 +49,8 @@
             </a>
 					</li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-invoice.html">
+					<li class="sidebar-item {{ Route::currentRouteNamed('pembayaran.index') ? 'active' : '' }}">
+						<a class="sidebar-link" href="{{url('/pembayaran')}}">
               <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Managemen pembayaran</span>
             </a>
 					</li>

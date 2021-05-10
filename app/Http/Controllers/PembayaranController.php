@@ -14,7 +14,9 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        //
+        $pembayarans = Pembayaran::all();
+        
+        return view('pembayaran.index',compact('pembayarans'));
     }
 
     /**
@@ -24,7 +26,7 @@ class PembayaranController extends Controller
      */
     public function create()
     {
-        //
+        return view('pembayaran.create');
     }
 
     /**
@@ -81,5 +83,13 @@ class PembayaranController extends Controller
     public function destroy(Pembayaran $pembayaran)
     {
         //
+    }
+
+    public function accPembayaran(Pembayaran $pembayaran)
+    {
+        $pembayaran->where('id',$pembayaran->id)->update(['verified'=>1]);
+        $pembayarans = Pembayaran::all();
+        
+        return view('pembayaran.index',compact('pembayarans'));
     }
 }

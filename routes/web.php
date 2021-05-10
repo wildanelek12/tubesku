@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KiosController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\{AuthController, HomeController};
 
 
@@ -22,8 +23,9 @@ Route::get('/', function () {
 });
 
 Route::resource('barang',BarangController::class);
-Route::resource('kios',BarangController::class);
-Route::get('/kios', [KiosController::class, 'index'])->name('kios.index');
+Route::resource('kios',KiosController::class);
+Route::resource('pembayaran',PembayaranController::class);
+Route::get('acc/{pembayaran}', [PembayaranController::class, 'accPembayaran'])->name('acc');
 
 
 Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
