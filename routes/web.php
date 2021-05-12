@@ -5,7 +5,6 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KiosController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\{AuthController, HomeController};
 
 
@@ -22,11 +21,9 @@ use App\Http\Controllers\{AuthController, HomeController};
 
 Route::get('/tes', function () {
     return view('welcome');
-});
+})->name('wellcome');
 
 Route::resource('barang',BarangController::class);
-Route::resource('pembayaran',PembayaranController::class);
-Route::resource('user',UserController::class);
 
 Route::prefix('kios')->name('kios')->group(function () {
   Route::get('/', [KiosController::class, 'index'])->name('.index');
@@ -38,10 +35,9 @@ Route::prefix('kios')->name('kios')->group(function () {
   Route::get('/{kios}/edit', [KiosController::class, 'edit'])->name('.edit');
 });
 
-Route::get('dashboard/{pembayaran}', [DashboardController::class, 'accPembayaran'])->name('acc');
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-
+Route::resource('pembayaran',PembayaranController::class);
+Route::resource('user',UserController::class);
+Route::get('acc/{pembayaran}', [PembayaranController::class, 'accPembayaran'])->name('acc');
 
 
 Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
@@ -51,6 +47,6 @@ Route::get('register', [AuthController::class, 'showFormRegister'])->name('regis
 Route::post('register', [AuthController::class, 'register']);
  
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('verifykios');
+  Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('veryfied.kios');
   Route::get('logout', [AuthController::class, 'logout'])->name('logout'); 
 });
