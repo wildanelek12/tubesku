@@ -24,7 +24,17 @@ Route::get('/tes', function () {
 });
 
 Route::resource('barang',BarangController::class);
-Route::resource('kios',KiosController::class);
+
+Route::prefix('kios')->name('kios')->group(function () {
+  Route::get('/', [KiosController::class, 'index'])->name('.index');
+  Route::post('/', [KiosController::class, 'store'])->name('.store');
+  Route::get('/create', [KiosController::class, 'create'])->name('.create');
+  Route::delete('/{kios}', [KiosController::class, 'destroy'])->name('.destroy');
+  Route::put('/{kios}', [KiosController::class, 'update'])->name('.update');
+  Route::get('/{kios}', [KiosController::class, 'show'])->name('.show');
+  Route::get('/{kios}/edit', [KiosController::class, 'edit'])->name('.edit');
+});
+
 Route::resource('pembayaran',PembayaranController::class);
 Route::resource('user',UserController::class);
 Route::get('acc/{pembayaran}', [PembayaranController::class, 'accPembayaran'])->name('acc');

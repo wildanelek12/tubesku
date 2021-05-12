@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Kios;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 class KiosFactory extends Factory
 {
@@ -24,7 +25,7 @@ class KiosFactory extends Factory
         return [
             'user_id' => rand(1,10),
             'nama' => $this->faker->word(),
-            'password' => bcrypt('admin'),
+            'password' => Hash::make('admin'),
             'verified' => 0,
             'tgl_kontrak' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
         ];

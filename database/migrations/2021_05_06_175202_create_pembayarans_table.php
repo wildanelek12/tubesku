@@ -16,7 +16,7 @@ class CreatePembayaransTable extends Migration
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
             $table->string('bulan');
-            $table->foreignId('kios_id')->constrained('kios');
+            $table->foreignId('kios_id')->constrained('kios')->onDelete('cascade');
             $table->date('tgl_pembayaran');
             $table->string('bukti');
             $table->boolean('verified')->default(0);

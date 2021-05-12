@@ -10,7 +10,7 @@ class KiosController extends Controller
     {
         $kios = Kios::all();
         
-        return view('kios.index',compact('kios'));
+        return view('kios.index', compact('kios'));
     }
 
     /**
@@ -76,6 +76,10 @@ class KiosController extends Controller
      */
     public function destroy(Kios $kios)
     {
-        //
+        $kios->delete();
+
+        $kios = Kios::all();
+        
+        return back();
     }
 }
