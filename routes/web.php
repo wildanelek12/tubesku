@@ -21,7 +21,7 @@ use App\Http\Controllers\{AuthController, HomeController};
 
 Route::get('/tes', function () {
     return view('welcome');
-});
+})->name('wellcome');
 
 Route::resource('barang',BarangController::class);
 
@@ -47,6 +47,6 @@ Route::get('register', [AuthController::class, 'showFormRegister'])->name('regis
 Route::post('register', [AuthController::class, 'register']);
  
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('home', [HomeController::class, 'index'])->name('home');
+  Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('veryfied.kios');
   Route::get('logout', [AuthController::class, 'logout'])->name('logout'); 
 });
