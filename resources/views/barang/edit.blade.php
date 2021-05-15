@@ -1,4 +1,4 @@
-    @extends('layouts.admin')
+    @extends('layouts.user')
     @section('content')
         
 
@@ -13,17 +13,7 @@
             <div class="form-group">
                 <label for="hargaBarang">Harga Barang</label>
                 <input type="number" class="form-control" id="hargaBarang" value="{{$barang->harga}}" name="harga"placeholder="Harga Barang">
-            </div>
-
-            <div class="form-group">
-                    <label for="select">Select:</label>
-                    <select name="kios_id" id="select">
-                        @foreach ($kios as $item)  
-                            <option value="{{$item->id}}" {{$item->id==$barang->kios_id?'selected':''}}>{{$item->nama}}</option>
-                        @endforeach
-                    </select>
-            
-            </div>             
+            </div>        
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 	  </div>

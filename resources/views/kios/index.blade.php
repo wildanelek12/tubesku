@@ -7,9 +7,7 @@
 	<div class="col-12 col-xl-12">
 		<div class="card">
 			<div class="card-header">
-				<h5 class="card-title">Striped Rows</h5>
-				<h6 class="card-subtitle text-muted">Use <code>.table-striped</code> to add zebra-striping to any table row within the
-					<code>&lt;tbody&gt;</code>.</h6>
+				<h1>Managemen KIOS</h5>
 			</div>
 			<table class="table table-striped">
 				<thead>
@@ -22,8 +20,6 @@
 				</thead>
 				<tbody>
 					@foreach ($kios as $item)
-						
-					
 					<tr>
 						<td>{{$item->nama}}</td>
 						<td>{{$item->user_id}}</td>

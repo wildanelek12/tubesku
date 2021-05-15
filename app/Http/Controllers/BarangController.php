@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Kios;
 use Illuminate\Http\Request;
+use Auth;
 
 class BarangController extends Controller
 {
@@ -42,26 +43,28 @@ class BarangController extends Controller
         $validateData = $request->validate([
            'nama'         => 'required',
            'harga'        => 'required',
-           'kios_id'        => 'required'
 
         ]);
 
-        Barang::create($validateData);
-        $barangs = Barang::all();
-        
-        return view('barang.index',compact('barangs'));
+        $kios_id_now = Auth::user()->id;
+        $barang = new Barang;
+        $barang-> nama = $request->get('nama');
+        $barang -> harga = $request->get('harga');
+        $barang ->kios_id = $kios_id_now;
+        $barang->save(); // Finally, save the record.
+        return back();
         
     }
 
     /**
      * Display the specified resource.
-     *
+     *                                                                                                             
      * @param  \App\Models\Barang  $barang
      * @return \Illuminate\Http\Response
      */
     public function show(Barang $barang)
     {
-        //
+   
     }
 
     /**
@@ -88,7 +91,6 @@ class BarangController extends Controller
         $validateData = $request->validate([
             'nama'         => 'required',
             'harga'        => 'required',
-            'kios_id'        => 'required'
  
          ]);
 
@@ -96,7 +98,7 @@ class BarangController extends Controller
          Barang::where('id',$barang->id)->update($validateData);
          $barang->update($validateData);
          $barangs = Barang::all();
-         return view('barang.index',compact('barangs'));
+         return redirect('/lihat-barang');
     }
 
     /**

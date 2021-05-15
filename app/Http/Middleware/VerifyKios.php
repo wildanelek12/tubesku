@@ -17,10 +17,12 @@ class VerifyKios
     public function handle(Request $request, Closure $next)
     {
         if (isset($request->user()->verified)) {
-            if ($request->user()->verified == 1) {
-                return redirect()->route('home');
-            } else {
-                return redirect()->route('wellcome');
+            if ($request->user()->verified == 'belum') {
+                return redirect()->route('user.create'); 
+            } else if($request->user()->verified == 'waiting') {
+                return redirect('/waiting-page');
+            }else{
+                return redirect()->route('dashboard_user');
             }
         }
 

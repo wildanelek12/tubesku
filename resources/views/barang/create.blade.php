@@ -1,5 +1,5 @@
 
-   @extends('layouts.admin')
+   @extends('layouts.user')
    @section('content')
        
 
@@ -15,15 +15,6 @@
                 <input type="number" class="form-control" id="hargaBarang" name="harga"placeholder="Harga Barang">
             </div>
 
-            <div class="form-group">
-                    <label for="select">Select:</label>
-                    <select name="kios_id" id="select">
-                        @foreach ($kios as $item)  
-                            <option value="{{$item->id}}">{{$item->nama}}</option>
-                        @endforeach
-                    </select>
-            
-            </div>             
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 	</div>

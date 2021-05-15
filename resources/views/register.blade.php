@@ -5,51 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Register</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
+  <link href="{{asset('template')}}/css/app.css" rel="stylesheet">
+  </head>
 <body>
-  <div class="container">
-    <div class="col-md-4 offset-md-4 mt-5">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="text-center">Form Register</h3>
+  <div class="container d-flex flex-column">
+    <div class="row vh-100">
+      <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+        <div class="d-table-cell align-middle">
+
+  
+          <div class="card">
+            <div class="card-body">
+              <div class="m-sm-4">
+                <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <div class="card-body">
+                    @if(session('errors'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      Something it's wrong:
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                      <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+                    @endif
+                  <div class="mb-3">
+                      <label class="form-label">NIK</label>
+                      <input class="form-control form-control-lg" type="number" name="nik" placeholder="Masukkan NIK" required/>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Nama</label>
+                    <input class="form-control form-control-lg" type="text" name="nama" placeholder="Masukkan Nama"required />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">No HP</label>
+                    <input class="form-control form-control-lg" type="text" name="hp" placeholder="Masukkan No HP" required/>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input class="form-control form-control-lg" type="email" name="email" placeholder="Masukkan Email" required/>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Alamat</label>
+                    <input class="form-control form-control-lg" type="text" name="alamat" placeholder="Masukkan Alamat" required/>
+                  </div>
+                  <div class="mb-3">
+                    <div class="custom-file">
+                      <label for="formFile" class="form-label" >Pilih File KTP</label>
+                      <input class="form-control" type="file" id="formFile" name="ktp">
+                  </div>
+                  </div>
+                  <div class="text-end mt-3">
+                    <button  class="btn btn-lg btn-primary">Konfirmasi</button>
+                      <button type="reset" class="btn btn-lg btn-danger">Reset</a>
+                    <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+  
         </div>
-        <form action="{{ route('register') }}" method="post">
-          @csrf
-          <div class="card-body">
-            @if(session('errors'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              Something it's wrong:
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-              <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-              </ul>
-            </div>
-            @endif
-            <div class="form-group">
-              <label for=""><strong>Nama Kios</strong></label>
-              <input type="text" name="nama" class="form-control" placeholder="Nama Kios">
-            </div>
-            <div class="form-group">
-              <label for=""><strong>Password</strong></label>
-              <input type="password" name="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <label for=""><strong>Konfirmasi Password</strong></label>
-              <input type="password" name="password_confirmation" class="form-control" placeholder="Password">
-            </div>
-          </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
-            <p class="text-center">Sudah punya akun? <a href="{{ route('login') }}">Login</a> sekarang!</p>
-          </div>
-        </form>
       </div>
     </div>
   </div>
 </body>
 </html>
+

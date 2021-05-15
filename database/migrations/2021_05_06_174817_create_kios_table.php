@@ -18,7 +18,7 @@ class CreateKiosTable extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('nama');
             $table->string('password');
-            $table->boolean('verified')->default(0);
+            $table->string('verified')->default('belum');
             $table->date('tgl_kontrak');
             $table->timestamps();
         });

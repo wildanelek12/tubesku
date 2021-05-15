@@ -5,6 +5,8 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KiosController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PenyewaController;
 use App\Http\Controllers\{AuthController, HomeController};
 
 
@@ -37,7 +39,23 @@ Route::prefix('kios')->name('kios')->group(function () {
 
 Route::resource('pembayaran',PembayaranController::class);
 Route::resource('user',UserController::class);
-Route::get('acc/{pembayaran}', [PembayaranController::class, 'accPembayaran'])->name('acc');
+Route::get('acc/{pembayaran}', [DashboardController::class, 'accPembayaran'])->name('acc');
+Route::get('accKios/{kios}', [DashboardController::class, 'accKios'])->name('accKios');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+Route::get('dashboard-user', [PenyewaController::class, 'createDashboard'])->name('dashboard_user');
+Route::get('bayar-user', [PenyewaController::class, 'createTambahPembayaran'])->name('bayar_user');
+Route::post('prosesbayar-user', [PenyewaController::class, 'prosesBayarUser'])->name('proses_bayar_user');
+Route::get('barang-user', [PenyewaController::class, 'createTambahBarang'])->name('barang_user');
+Route::get('lihat-barang', [PenyewaController::class, 'createLihatBarang'])->name('lihat_barang');
+
+Route::get('/waiting-page', function () {
+  return view('confirm_page');
+});
+
+
+
 
 
 Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');

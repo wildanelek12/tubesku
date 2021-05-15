@@ -10,6 +10,7 @@
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="shortcut icon" href="{{asset('template')}}/img/icons/icon-48x48.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	
 	<title>Blank Page | AdminKit Demo</title>
 
@@ -31,38 +32,22 @@
 					</li>
 
 					<li class="sidebar-item {{ Route::currentRouteNamed('dashboard') ? 'active' : '' }}">
-						<a class="sidebar-link" href="{{url('/dashboard')}}">
+						<a class="sidebar-link" href="{{url('/dashboard-user')}}">
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             </a>
 					</li>
 
 					<li class="sidebar-item {{ Route::currentRouteNamed('user.index') ? 'active' : '' }}">
-						<a class="sidebar-link" href="{{url('/user')}}">
-              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Managemen Penyewa</span>
+						<a class="sidebar-link" href="{{url('/bayar-user')}}">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Pembayaran</span>
             </a>
 					</li>
 
 					<li class="sidebar-item {{ Route::currentRouteNamed('kios.index') ? 'active' : '' }}">
-						<a class="sidebar-link" href="{{url('/kios')}}">
-              <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Managemen Kios</span>
+						<a class="sidebar-link" href="{{url('/lihat-barang')}}">
+              <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Managemen Barang</span>
             </a>
-					</li>
-
-					<li class="sidebar-item {{ Route::currentRouteNamed('pembayaran.index') ? 'active' : '' }}">
-						<a class="sidebar-link" href="{{url('/pembayaran')}}">
-              <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Managemen pembayaran</span>
-            </a>
-					</li>
-
-					<li class="sidebar-item ">
-						<a class="sidebar-link" href="pages-blank.html">
-              <i class="align-middle" data-feather="book"></i> <span class="align-middle"></span>
-            </a>
-					</li>
-
-				
-
-			
+					</li>						
 				</ul>
 
 
@@ -224,7 +209,7 @@
               </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="{{asset('template')}}/img/avatars/avatarfix.png" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Admin</span>
+                <img src="{{asset('template')}}/img/avatars/avatarfix.png" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">{{{ isset(Auth::user()->nama) ? Auth::user()->nama : Auth::user()->nama }}}</span>
               </a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
