@@ -1,45 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Untitled Document</title>
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-	
-	
-  </head>
-  <body>
-        <div class="container">
-        <form action="{{route('barang.store')}}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="namaBarang">Nama Barang</label>
-                <input type="text" class="form-control" id="namaBarang" name="nama" placeholder="Nama Barang">
-            </div>
-            <div class="form-group">
-                <label for="hargaBarang">Harga Barang</label>
-                <input type="number" class="form-control" id="hargaBarang" name="harga"placeholder="Harga Barang">
-            </div>
+@extends('layouts.admin')
+@section('content')
+    
 
-            <div class="form-group">
-                    <label for="select">Select:</label>
-                    <select name="kios_id" id="select">
-                        @foreach ($kios as $item)  
-                            <option value="{{$item->id}}">{{$item->nama}}</option>
+
+  
+          <div class="card">
+            <div class="card-body">
+              <div class="m-sm-4">
+                <form action="{{ url('kios') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                  <div class="card-body">
+                    @if(session('errors'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      Something it's wrong:
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                      <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
                         @endforeach
-                    </select>
-            
-            </div>             
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-            
-	
-	
-	  </div>
-<!-- body code goes here -->
-
-
-  </body>
-</html>
+                      </ul>
+                    </div>
+                    @endif                            
+                   
+                  <div class="mb-3">
+                      <label class="form-label">Nama Kios</label>
+                      <input class="form-control form-control-lg"  type="text" name="nama" placeholder="Masukkan Nama Kios" required/>
+                  </div>
+                  <div class="text-end mt-3">
+                    <button  class="btn btn-lg btn-primary">Konfirmasi</button>
+                    <button type="reset" class="btn btn-lg btn-danger">Reset</a>
+                    <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  @endsection

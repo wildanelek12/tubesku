@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login</title>
-  
 	<link href="{{asset('template')}}/css/app.css" rel="stylesheet">
 </head>
 <body>
@@ -25,7 +24,7 @@
             <div class="card-body">
               <div class="m-sm-4">
                 <div class="text-center">
-                  <img src="img/avatars/avatar.jpg" alt="Charles Hall" class="img-fluid rounded-circle" width="132" height="132" />
+                  <img src="{{asset('template')}}/img/avatars/avatarfix.png" alt="Charles Hall" class="img-fluid rounded-circle" width="132" height="132" />
                 </div>
                 <form action="{{ route('login') }}" method="post">
                   @csrf

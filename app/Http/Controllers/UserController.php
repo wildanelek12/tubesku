@@ -80,7 +80,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view ('user.edit',['users' => $user]);
     }
 
     /**
@@ -92,7 +92,27 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validateData = $request->validate([
+            'nik'        => 'required', 
+            'nama'         => 'required',     
+            'hp'         => 'required',   
+            'email'         => 'required',  
+            'alamat'         => 'required',     
+            ]);
+
+        $user->where('id',$user->id)->update([
+            'nik' => $request->nik,
+            'nama' => $request->nama,
+            'hp' => $request->hp,
+            'email' => $request->email,
+            'alamat' => $request->alamat,
+        ]);
+
+        $users = User::all();
+        
+        return view('user.index',compact('users'));
+
+
     }
 
     /**

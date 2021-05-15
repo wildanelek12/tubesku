@@ -20,7 +20,7 @@ class KiosController extends Controller
      */
     public function create()
     {
-        //
+        return view('kios.create');
     }
 
     /**
@@ -31,7 +31,22 @@ class KiosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'nama'        => 'required', 
+
+            ]);
+        $kios = new Kios;
+        $kios -> nama = $request->nama;
+        $kios -> user_id = 1500;
+        $kios -> password = 'admin';
+        $kios -> tgl_kontrak = null;
+        $kios -> save();
+
+        $kios = Kios::all();
+        
+        return view('kios.index', compact('kios'));
+
+
     }
 
     /**
@@ -53,7 +68,7 @@ class KiosController extends Controller
      */
     public function edit(Kios $kios)
     {
-        //
+        return view('kios.edit',['kios'=>$kios]);
     }
 
     /**
@@ -65,7 +80,20 @@ class KiosController extends Controller
      */
     public function update(Request $request, Kios $kios)
     {
-        //
+        $validateData = $request->validate([
+            'nama'        => 'required', 
+   
+            ]);
+
+        $kios->where('id',$kios->id)->update([
+            'nama' => $request->nama,
+
+        ]);
+
+        $kios = Kios::all();
+        
+        return view('kios.index',compact('kios'));
+
     }
 
     /**
