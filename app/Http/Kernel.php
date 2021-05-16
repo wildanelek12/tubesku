@@ -63,5 +63,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'veryfied.kios' => \App\Http\Middleware\VerifyKios::class,
+        'role' => \App\Http\Middleware\SimpleRole::class
     ];
 }

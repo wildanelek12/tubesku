@@ -10,7 +10,7 @@ class Pembayaran extends Model
 
     use HasFactory;
 
-    public function bayar()
+    public function kios()
     {
         return $this->belongsTo(Kios::class);
     }

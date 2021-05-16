@@ -40,7 +40,7 @@ class PenyewaController extends Controller
             'bulan'        => 'required', 
             'bukti'         => 'required'         
             ]);
-         $kios_id_now = Auth::user()->nama;
+         $kios_id_now = Auth::user()->nik;
          
          $extFile=$request->bukti->getClientOriginalExtension();
          $namaFile=$kios_id_now.time().'.'.$extFile;

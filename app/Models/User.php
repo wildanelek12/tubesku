@@ -17,4 +17,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [];
+
+    public function kios () {
+      return $this->hasOne(Kios::class);
+    }
 }

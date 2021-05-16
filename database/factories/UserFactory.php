@@ -29,8 +29,6 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'alamat' => $this->faker->address(),
             'ktp' => '',
-        
-         
         ];
     }
 

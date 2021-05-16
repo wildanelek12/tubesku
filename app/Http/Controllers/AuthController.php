@@ -14,7 +14,11 @@ class AuthController extends Controller
   public function showFormLogin()
   {
     if (Auth::check()) {
-      return redirect()->route('home');
+      if (Auth::user()->role == 'admin') {
+        return redirect()->route('dashboard');
+      } else if (Auth::user()->role == 'user') {
+        return redirect()->route('dashboard_user');
+      }
     }
     return view('login');
   }
@@ -32,10 +36,6 @@ class AuthController extends Controller
     ];
 
 
-    if($request->nama=='admin' && $request->password =='admin'){
-      return redirect()->route('dashboard');
-    }
-
     $validator = Validator::make($request->all(), $rules, $messages);
 
     if($validator->fails()){
@@ -50,7 +50,11 @@ class AuthController extends Controller
     Auth::attempt($data);
 
     if (Auth::check()) { 
-      return redirect()->route('home');
+      if (Auth::user()->role == 'admin') {
+        return redirect()->route('dashboard');
+      } else if (Auth::user()->role == 'user') {
+        return redirect()->route('dashboard_user');
+      }
     }else {
       Session::flash('error', 'Username atau password salah');
       return redirect()->route('login');
@@ -86,7 +90,7 @@ class AuthController extends Controller
     }
 
     $kios = new Kios;
-    $kios->user_id = 1500;
+    $kios->user_id = 1;
     $kios->tgl_kontrak = \Carbon\Carbon::now();
     $kios->nama = ucwords(strtolower($request->nama));
     $kios->password = Hash::make($request->password);

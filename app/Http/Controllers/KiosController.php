@@ -105,8 +105,6 @@ class KiosController extends Controller
     public function destroy(Kios $kios)
     {
         $kios->delete();
-
-        $kios = Kios::all();
         
         return back();
     }

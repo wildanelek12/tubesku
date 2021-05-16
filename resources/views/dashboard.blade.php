@@ -41,7 +41,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th >Bulan</th>
+                        <th>Bulan</th>
                         <th>Nama</th>
                         <th>Tanggal Bayar</th>
                         <th>Bukti</th>
@@ -49,16 +49,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pembayarans as $item)
-                        
-                    
+                    @foreach ($pembayarans as $item)                    
                     <tr>
                         <td>{{$item->bulan}}</td>
-                        <td>{{$item->kios_id}}</td>
+                        <td>{{$item->kios->nama}}</td>
                         <td>{{$item->tgl_pembayaran}}</td>
-                        <td><a class="btn btn-info">lihat Bukti</td>
-                        <td><a href="{{url('/acc/'.$item->id)}}"class="btn btn-success">Konfirmasi</td>	
-             
+                        <td><a href="#" class="btn btn-info btn-see-detail" data-toggle="modal" data-target="#see-detail-modal" data-kios="{{ asset('/app/'.$item->bukti) }}">lihat Bukti</a></td>
+                        <td><a href="{{url('/acc/'.$item->id)}}"class="btn btn-success">Konfirmasi</a></td>
                     </tr>
                     @endforeach
                    
@@ -79,7 +76,7 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th >Nama Kios</th>
+						<th>Nama Kios</th>
 						<th>Nama Pemilik</th>
 						<th>Tanggal Kontrak</th>
                         <th>KTP</th>
@@ -90,11 +87,10 @@
 					@foreach ($users as $item)
 					<tr>
 						<td>{{$item->nama}}</td>
-						<td>{{$item->user_id}}</td>
+						<td>{{$item->user->nama}}</td>
 						<td>{{$item->tgl_kontrak}}</td>
-                        <td><a class="btn btn-info">Lihat KTP</td>	
-						
-                            <td><a href="{{url('/accKios/'.$item->id)}}"class="btn btn-success">Konfirmasi</td>	
+                        <td><a href="#" class="btn btn-info btn-see-detail" data-toggle="modal" data-target="#see-detail-modal" data-kios="{{ asset('/app/'.$item->user->ktp) }}">lihat KTP</a></td>	
+						<td><a href="{{url('/accKios/'.$item->id)}}"class="btn btn-success">Konfirmasi</a></td>	
 					</tr>
 					@endforeach
 					
@@ -104,6 +100,29 @@
 	</div>	
 </div>
 
-   
+<div class="modal fade" id="see-detail-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title font-weight-bold text-success">Detail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img id="img-detail" class="w-100">
+      </div>
+    </div>
+  </div>
+</div>   
 
- @endsection
+@endsection
+
+@push('custom_scripts')
+    <script type="text/javascript">
+        $(document).on('click', '.btn-see-detail', function () {
+            var data = $(this).data('kios');
+            $('#img-detail').attr('src', data);
+        });
+    </script>
+@endpush

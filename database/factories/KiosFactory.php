@@ -23,10 +23,10 @@ class KiosFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => rand(1,10),
+            'user_id' => 1,
             'nama' => $this->faker->word(),
             'password' => Hash::make('admin'),
-            'verified' => 0,
+            'verified' => 'belum',
             'tgl_kontrak' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
         ];
     }

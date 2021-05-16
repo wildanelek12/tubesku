@@ -20,17 +20,17 @@ class DashboardController extends Controller
         return view('dashboard', ['pembayarans'=>$pembayarans,'kiosKosong'=>$kiosKosong,'kiosTerisi'=>$kiosTerisi,'users'=>$users]);
         //  return view('dashboard_user', ['pembayarans'=>$pembayarans]);
     }
+
     public function accPembayaran(Pembayaran $pembayaran)
     {
         $pembayaran->where('id',$pembayaran->id)->update(['verified'=>1]);
-        $pembayarans = Pembayaran::all();
         
         return back();
     }
+
     public function accKios(Kios $kios)
     {
         $kios->where('id',$kios->id)->update(['verified'=>'sukses']);
-        $kios = Kios::all();
         
         return back();
     }

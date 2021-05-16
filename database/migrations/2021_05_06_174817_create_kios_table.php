@@ -16,6 +16,7 @@ class CreateKiosTable extends Migration
         Schema::create('kios', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->enum('role', ['user', 'admin'])->default('user');
             $table->string('nama');
             $table->string('password');
             $table->string('verified')->default('belum');

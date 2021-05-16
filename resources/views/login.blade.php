@@ -26,7 +26,7 @@
                 <div class="text-center">
                   <img src="{{asset('template')}}/img/avatars/avatarfix.png" alt="Charles Hall" class="img-fluid rounded-circle" width="132" height="132" />
                 </div>
-                <form action="{{ route('login') }}" method="post">
+                <form action="{{ url('login') }}" method="post">
                   @csrf
                   @if(session('errors'))
                   <div class="alert alert-danger alert-dismissible fade show" role="alert">

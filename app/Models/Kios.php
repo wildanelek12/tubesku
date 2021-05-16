@@ -11,4 +11,16 @@ class Kios extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $guarded = [];
+
+    public function pembayarans () {
+      return $this->hasMany(Pembayaran::class);
+    }
+
+    public function barangs () {
+      return $this->hasMany(Barang::class);
+    }
+
+    public function user () {
+      return $this->belongsTo(User::class);
+    }
 }

@@ -38,27 +38,25 @@ class UserController extends Controller
             'hp'         => 'required',   
             'email'         => 'required',  
             'alamat'         => 'required',     
-            ]);
+        ]);
          
-         $extFile=$request->ktp->getClientOriginalExtension();
-         $namaFile='ktp'.$request->nama.time().'.'.$extFile;
-         $path = $request->ktp->storeAs('ktp',$namaFile);
+        $extFile=$request->ktp->getClientOriginalExtension();
+        $namaFile='ktp'.$request->nik.time().'.'.$extFile;
+        $path = $request->ktp->storeAs('ktp',$namaFile);
      
-        
-         $user = new User;
-        $user -> nik = $request->get('nik');
-        $user -> nama = $request->get('nama');
-        $user -> hp = $request->get('hp');
-        $user -> email = $request->get('email');
-        $user -> alamat = $request->get('alamat');
-         $user -> ktp = $path;
-        $user->save(); // Finally, save the record.
+        $user = new User;
+        $user->nik = $request->get('nik');
+        $user->nama = $request->get('nama');
+        $user->hp = $request->get('hp');
+        $user->email = $request->get('email');
+        $user->alamat = $request->get('alamat');
+        $user->ktp = $path;
+        $user->save();
 
         $kios_id_now = Auth::user()->id;
         Kios::where('id',$kios_id_now)->update(['user_id'=>$user->id,'verified'=>'waiting']);
 
         return view('confirm_page');
-        
     }
 
     /**

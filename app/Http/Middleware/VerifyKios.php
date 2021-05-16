@@ -21,9 +21,9 @@ class VerifyKios
                 return redirect()->route('user.create'); 
             } else if($request->user()->verified == 'waiting') {
                 return redirect('/waiting-page');
-            }else{
-                return redirect()->route('dashboard_user');
             }
+        } else {
+            return abort(401);
         }
 
         return $next($request);
