@@ -1,21 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Kios;
+use App\Models\Barang;
 
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+ 
     /**
      * Show the application dashboard.
      *
@@ -23,6 +16,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $kios = Kios::all();
+        $barangs = new Barang;
+        return view('index',['kios'=>$kios,'barangs'=>$barangs]);
+    }
+    public function show(Kios $kios)
+    {
+        echo json_encode($kios->barangs);
     }
 }

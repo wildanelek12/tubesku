@@ -37,9 +37,9 @@ class KiosController extends Controller
             ]);
         $kios = new Kios;
         $kios -> nama = $request->nama;
-        $kios -> user_id = 1500;
-        $kios -> password = 'admin';
-        $kios -> tgl_kontrak = null;
+        $kios -> user_id = 1;
+        $kios -> password = bcrypt('admin');
+        $kios -> tgl_kontrak = \Carbon\Carbon::now() ;
         $kios -> save();
 
         $kios = Kios::all();

@@ -21,6 +21,6 @@ class UserSeeder extends Seeder
           'alamat' => '0',
           'ktp' => '0',
         ]);
-        User::factory()->count(10)->create();
+        // User::factory()->count(10)->create();
     }
 }

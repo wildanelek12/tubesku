@@ -83,7 +83,7 @@
                 <img src="{{asset('template')}}/img/avatars/avatarfix.png" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">{{{ isset(Auth::user()->nama) ? Auth::user()->nama : Auth::user()->nama }}}</span>
               </a>
 							<div class="dropdown-menu dropdown-menu-end">
-								
+									
 								<a class="dropdown-item" href="/logout">Log out</a>
 							</div>
 						</li>

@@ -40,7 +40,7 @@ class PenyewaController extends Controller
             'bulan'        => 'required', 
             'bukti'         => 'required'         
             ]);
-         $kios_id_now = Auth::user()->nik;
+         $kios_id_now = Auth::user()->nama;
          
          $extFile=$request->bukti->getClientOriginalExtension();
          $namaFile=$kios_id_now.time().'.'.$extFile;
@@ -49,7 +49,8 @@ class PenyewaController extends Controller
 
          $pembayaran = new Pembayaran;
         $pembayaran -> bulan = $request->get('bulan');
-         $pembayaran -> kios_id = Auth::user()->id;
+         $pembayaran -> kios_id = Auth::user()->id;  
+         $pembayaran -> tgl_pembayaran = \Carbon\Carbon::now();
         $pembayaran ->bukti = $path;
         $pembayaran->save(); // Finally, save the record.
         return back();

@@ -85,11 +85,5 @@ class PembayaranController extends Controller
         //
     }
 
-    public function accPembayaran(Pembayaran $pembayaran)
-    {
-        $pembayaran->where('id',$pembayaran->id)->update(['verified'=>1]);
-        $pembayarans = Pembayaran::all();
-        
-        return view('pembayaran.index',compact('pembayarans'));
-    }
+
 }

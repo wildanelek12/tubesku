@@ -8,7 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenyewaController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +20,17 @@ use App\Http\Controllers\AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
+Route::get('/ ', [HomeController::class, 'index'])->name('indexHome');
+Route::get('/{kios}', [HomeController::class, 'show'])->name('showHome');
+Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::prefix('user')->name('user')->middleware(['auth', 'role:user'])->group(function () {
   Route::get('/create', [UserController::class, 'create'])->name('.create');
 });
- 
+Route::resource('barang', BarangController::class);
 Route::group(['middleware' => 'auth'], function () {
   Route::group(['middleware' => 'role:admin'], function () { 
-    Route::resource('barang', BarangController::class);
+  
 
     Route::prefix('kios')->name('kios')->group(function () {
       Route::get('/', [KiosController::class, 'index'])->name('.index');
@@ -74,6 +76,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
   });
 
-  Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+  
+  
 
 });
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');

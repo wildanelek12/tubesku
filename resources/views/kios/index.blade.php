@@ -13,7 +13,7 @@
 					</div>
 			</div>
 	
-			<table class="table table-striped">
+			<table class="table table-striped" id="myTable">
 				<thead>
 					<tr>
 						<th >Nama Kios</th>
@@ -77,5 +77,11 @@
 	    var _id = $(this).data('kios-id');
 	    $('#delete-form').attr('action', '/kios/' + _id);
 		});
+
+		$(document).ready( function () {
+    		$('#myTable').DataTable();
+		} );
+
 	</script>
+	
 @endpush

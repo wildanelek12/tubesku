@@ -14,6 +14,6 @@ class PembayaranSeeder extends Seeder
      */
     public function run()
     {
-        Pembayaran::factory()->count(10)->create();
+        // Pembayaran::factory()->count(10)->create();
     }
 }

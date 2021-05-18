@@ -8,7 +8,7 @@
 				<div class="card-header">
 					<h1>Pembayaran</h1>
 				</div>
-				<table class="table table-striped">
+				<table class="table table-striped" id="myTable">
 					<thead>
 						<tr>
 							<th>KIOS</th>
@@ -58,6 +58,11 @@
             var data = $(this).data('kios');
             $('#img-detail').attr('src', data);
         });
+
+		
+		$(document).ready( function () {
+    		$('#myTable').DataTable();
+		} );
     </script>
 @endpush
  
