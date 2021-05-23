@@ -18,7 +18,7 @@ class HomeController extends Controller
     {
         $kios = Kios::all();
         $barangs = new Barang;
-        return view('index',['kios'=>$kios,'barangs'=>$barangs]);
+        return view('home',['kios'=>$kios,'barangs'=>$barangs]);
     }
     public function show(Kios $kios)
     {

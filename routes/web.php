@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenyewaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HalamanUtamaController;
 
 
 /*
@@ -21,6 +22,7 @@ use App\Http\Controllers\AuthController;
 |
 */
 Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
+Route::get('/home', [HalamanUtamaController::class, 'index'])->name('index');
 Route::post('login', [AuthController::class, 'login']);
 Route::prefix('user')->name('user')->middleware(['auth', 'role:user'])->group(function () {
   Route::get('/create', [UserController::class, 'create'])->name('.create');
