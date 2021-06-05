@@ -24,13 +24,14 @@ use App\Http\Controllers\HalamanUtamaController;
 Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
 Route::get('/home', [HalamanUtamaController::class, 'index'])->name('index');
 Route::post('login', [AuthController::class, 'login']);
+Route::resource('barang', BarangController::class);
 Route::prefix('user')->name('user')->middleware(['auth', 'role:user'])->group(function () {
   Route::get('/create', [UserController::class, 'create'])->name('.create');
 });
  
 Route::group(['middleware' => 'auth'], function () {
   Route::group(['middleware' => 'role:admin'], function () { 
-    Route::resource('barang', BarangController::class);
+   
 
     Route::prefix('kios')->name('kios')->group(function () {
       Route::get('/', [KiosController::class, 'index'])->name('.index');
@@ -45,9 +46,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('user')->name('user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('.index');
         Route::delete('/{user}', [UserController::class, 'destroy'])->name('.destroy');
-        Route::put('/{user}', [UserController::class, 'update'])->name('.update');
+        Route::patch('/{user}', [UserController::class, 'update'])->name('.update');
         Route::get('/{user}', [UserController::class, 'show'])->name('.show');
         Route::get('/{user}/edit', [UserController::class, 'edit'])->name('.edit');
+        
       });
 
     Route::resource('pembayaran',PembayaranController::class);
@@ -72,7 +74,9 @@ Route::group(['middleware' => 'auth'], function () {
       Route::get('bayar-user', [PenyewaController::class, 'createTambahPembayaran'])->name('bayar_user');
       Route::post('prosesbayar-user', [PenyewaController::class, 'prosesBayarUser'])->name('proses_bayar_user');
       Route::get('barang-user', [PenyewaController::class, 'createTambahBarang'])->name('barang_user');
+      Route::post('proses-user', [PenyewaController::class, 'prosesBarang'])->name('prosesBarang');
       Route::get('lihat-barang', [PenyewaController::class, 'createLihatBarang'])->name('lihat_barang');
+  
     });
   });
 

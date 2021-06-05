@@ -18,6 +18,7 @@ class CreateBarangsTable extends Migration
             $table->string('nama');
             $table->integer('harga');
             $table->foreignId('kios_id')->constrained('kios')->onDelete('cascade');
+            $table->string('kategori');
             $table->timestamps();
         });
     }

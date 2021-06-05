@@ -27,6 +27,28 @@ class PenyewaController extends Controller
     {
         return view('barang.create');
     }
+    public function prosesBarang(Request $request)
+    {
+        $validateData = $request->validate([
+           'nama'         => 'required',
+           'harga'        => 'required',
+           'kategori'        => 'required',
+
+
+        ]);
+
+        $kios_id_now = Auth::user()->id;
+        $barang = new Barang;
+        $barang-> nama = $request->get('nama');
+        $barang -> harga = $request->get('harga');
+        $barang -> kategori = $request->get('kategori');
+        
+        $barang ->kios_id = $kios_id_now;
+        $barang->save(); // Finally, save the record.
+        $kios_id_now = Auth::user()->id;
+        $barangs = Barang::Where('kios_id',$kios_id_now)->get();
+        return view('barang.index',compact('barangs'));
+    }
     public function createLihatBarang()
     {
         $kios_id_now = Auth::user()->id;

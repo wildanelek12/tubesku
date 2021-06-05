@@ -11,7 +11,8 @@ class HalamanUtamaController extends Controller
    public function index()
    {
     $kios = Kios::all();
-    $barangs = new Barang;
+    $barangs = Barang::all();
+
     return view('home',['kios'=>$kios,'barangs'=>$barangs]);
    }
 }

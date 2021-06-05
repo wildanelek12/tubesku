@@ -16,7 +16,7 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
   <!-- Vendor CSS Files -->
   <link href="{{asset('/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('/vendor/icofont/icofont.min.css')}}" rel="stylesheet">
@@ -249,26 +249,26 @@
         </div>
 
         <div class="row">
-            <div class="col-12 col-xl-12">
+         
                 <div class="card">
         
                     <table class="table table-striped" id="myTable">
                         <thead>
                             <tr>
-                                <th>Nama Kios</th>
+                                <th>Nama Barang</th>
                                 <th>Nama Pemilik</th>
-                                <th>No HP</th>
-                                <th>Lihat Barang </th>
+                                <th>Nama Kategori</th>
+                                <th>Nama harga</th>
+                            
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($kios as $item)				
+                            @foreach ($barangs as $item)				
                                 <tr>
-                                    <td>{{$item->nama}}</td>
-                                    <td>{{$item->user->nama}}</td>
-                                    <td>{{$item->user->hp}}</td>
-                                    <th><a href="#" class="btn btn-info btn-see-detail" data-toggle="modal" data-target="#see-detail-modal" data-kios="{{$item->id }}">Lihat Barang</a> </th>
-                             
+                                  <td>{{$item->nama}}</td>
+                                  <td>{{$item->kios->nama}}</td>
+                                  <td>{{$item->kategori}}</td>
+                                  <td>Rp.{{$item->harga}}</td>
     
                                 </tr>
                             @endforeach
@@ -276,7 +276,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>	
+          
         </div>
 
         
@@ -426,39 +426,14 @@
   <!-- Template Main JS File -->
   <script src="{{asset('/js/main.js')}}"></script>
 
-    <script>
-        $(document).on('click', '.btn-see-detail', function () {
-            var data = $(this).data('kios');
-
-            $.ajax({
-              url: '/'+data,
-              
-              type: 'get',
-              dataType: 'json',
-              success: function(response){
-              var len = 0;
-              $('#myTable tbody').empty(); // Empty <tbody>
-              if(response['data'] != null){
-              len = response['data'].length;
-              for(var i=0; i<len; i++){
-                var nama = response['data'][i].nama;
-                var harga = response['data'][i].harga;
-                var tr_str = "<tr>" +
-                "<td>" + nama + "</td>" +
-                "<td>" + harga + "</td>" +
-                "</tr>";
-                $("#myTable tbody").append(tr_str);
-              }
-
-            }
-        }});
-            
-        
-        });
-
+  <script type="text/javascript">
+		$(document).ready( function () {
+    		$('#myTable').DataTable();
+		} );
         
 
      </script>
+     	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
 </body>
 
